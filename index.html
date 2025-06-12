@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haneef - Creative Frontend Developer | Portfolio</title>
+    <meta name="description" content="Professional portfolio of Haneef, a Creative Frontend Developer from Srinagar, India. Showcasing modern web development skills and projects.">
+    <meta name="keywords" content="Frontend Developer, Web Developer, React, JavaScript, Srinagar, India, Portfolio">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #06b6d4;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #3b82f6;
+            --secondary-color: #60a5fa;
+            --accent-color: #22d3ee;
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --bg-primary: #111827;
+            --bg-secondary: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-bar {
+            position: relative;
+            height: 8px;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            transition: width 2s ease-in-out;
+        }
+
+        .floating-animation {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--accent-color);
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--accent-color); }
+        }
+
+        .section-padding {
+            padding: 4rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--primary-color);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .nav-header {
+            background: rgba(17, 24, 39, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 1rem 0;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: var(--primary-color);
+            opacity: 0.3;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 2rem 0;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <i class="fas fa-moon" id="theme-icon"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="nav-header">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white section-padding min-h-screen flex items-center">
+        <div class="container">
+            <div class="text-center">
+                <div class="floating-animation inline-block">
+                    <i class="fas fa-code text-6xl mb-6 opacity-80"></i>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-display font-bold mb-4">
+                    Haneef
+                </h1>
+                <h2 class="text-2xl md:text-3xl mb-6 typewriter">
+                    Creative Frontend Developer
+                </h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+                    Crafting beautiful, responsive web experiences from the scenic valleys of Srinagar, India. 
+                    Passionate about modern web technologies and user-centered design.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#projects" class="btn-primary">
+                        <i class="fas fa-eye mr-2"></i>View My Work
+                    </a>
+                    <a href="#contact" class="btn-primary bg-transparent border-2 border-white hover:bg-white hover:text-blue-600">
+                        <i class="fas fa-envelope mr-2"></i>Get In Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding bg-gray-50" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="text-4xl font-display font-bold text-center mb-12" style="color: var(--text-primary);">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-2xl font-semibold mb-4" style="color: var(--primary-color);">Hello, I'm Haneef</h3>
+                    <p class="text-lg mb-6" style="color: var(--text-secondary);">
+                        A passionate Frontend Developer based in the beautiful city of Srinagar, Kashmir. With a keen eye for design 
+                        and a love for clean, efficient code, I create digital experiences that are both functional and visually appealing.
+                    </p>
+                    <p class="text-lg mb-6" style="color: var(--text-secondary);">
+                        I specialize in modern web technologies including React, JavaScript, and responsive design principles. 
+                        My goal is to bridge the gap between design and technology, creating websites that not only look great 
+                        but also provide exceptional user experiences.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">React.js</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">CSS3</span>
+                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">HTML5</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-sm" style="color: var(--text-secondary);">
+                        <div><i class="fas fa-map-marker-alt text-red-500 mr-2"></i>Srinagar, India</div>
+                        <div><i class="fas fa-phone text-green-500 mr-2"></i>7006505391</div>
+                        <div><i class="fas fa-graduation-cap text-blue-500 mr-2"></i>Frontend Developer</div>
+                        <div><i class="fas fa-coffee text-amber-500 mr-2"></i>Coffee Enthusiast</div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 text-center">
+                    <div class="relative inline-block">
+                        <img src="https://page1.genspark.site/v1/base64_upload/7369639f9e133e2253e30a3d26734314" 
+                             alt="Haneef - Frontend Developer" 
+                             class="w-80 h-96 object-cover rounded-2xl shadow-2xl">
+                        <div class="absolute -bottom-4 -right-4 w-24 h-24 gradient-bg rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-code text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding">
+        <div class="container">
+            <h2 class="text-4xl font-display font-bold text-center mb-12" style="color: var(--text-primary);">Skills & Technologies</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Frontend Skills -->
+                <div class="card-hover p-6 rounded-lg" style="background-color: var(--bg-secondary);">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-laptop-code text-4xl mb-4" style="color: var(--primary-color);"></i>
+                        <h3 class="text-xl font-semibold" style="color: var(--text-primary);">Frontend</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">React.js</span>
+                                <span style="color: var(--text-secondary);">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">JavaScript</span>
+                                <span style="color: var(--text-secondary);">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">CSS3</span>
+                                <span style="color: var(--text-secondary);">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">HTML5</span>
+                                <span style="color: var(--text-secondary);">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Frameworks -->
+                <div class="card-hover p-6 rounded-lg" style="background-color: var(--bg-secondary);">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-tools text-4xl mb-4" style="color: var(--primary-color);"></i>
+                        <h3 class="text-xl font-semibold" style="color: var(--text-primary);">Tools & Frameworks</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">Tailwind CSS</span>
+                                <span style="color: var(--text-secondary);">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">Git</span>
+                                <span style="color: var(--text-secondary);">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">Webpack</span>
+                                <span style="color: var(--text-secondary);">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">Figma</span>
+                                <span style="color: var(--text-secondary);">65%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="card-hover p-6 rounded-lg" style="background-color: var(--bg-secondary);">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-lightbulb text-4xl mb-4" style="color: var(--primary-color);"></i>
+                        <h3 class="text-xl font-semibold" style="color: var(--text-primary);">Soft Skills</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">Problem Solving</span>
+                                <span style="color: var(--text-secondary);">92%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">Team Work</span>
+                                <span style="color: var(--text-secondary);">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">Communication</span>
+                                <span style="color: var(--text-secondary);">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span style="color: var(--text-secondary);">Creativity</span>
+                                <span style="color: var(--text-secondary);">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="text-4xl font-display font-bold text-center mb-12" style="color: var(--text-primary);">Featured Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card card-hover">
+                    <div class="h-48 gradient-bg flex items-center justify-center">
+                        <i class="fas fa-shopping-cart text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3" style="color: var(--text-primary);">E-Commerce Platform</h3>
+                        <p class="mb-4" style="color: var(--text-secondary);">
+                            Modern e-commerce website with React, featuring product catalog, shopping cart, and payment integration.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">React</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Node.js</span>
+                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">CSS3</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Live Demo</a>
+                            <a href="#" class="text-gray-600 hover:underline"><i class="fab fa-github mr-1"></i>Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card card-hover">
+                    <div class="h-48 gradient-bg flex items-center justify-center">
+                        <i class="fas fa-tasks text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3" style="color: var(--text-primary);">Task Management App</h3>
+                        <p class="mb-4" style="color: var(--text-secondary);">
+                            Intuitive task management application with drag-and-drop functionality, built with modern React hooks.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">React</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">JavaScript</span>
+                            <span class="bg-pink-100 text-pink-800 px-2 py-1 rounded text-xs">Tailwind</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Live Demo</a>
+                            <a href="#" class="text-gray-600 hover:underline"><i class="fab fa-github mr-1"></i>Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card card-hover">
+                    <div class="h-48 gradient-bg flex items-center justify-center">
+                        <i class="fas fa-chart-line text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3" style="color: var(--text-primary);">Dashboard Analytics</h3>
+                        <p class="mb-4" style="color: var(--text-secondary);">
+                            Interactive dashboard with real-time data visualization and responsive design for business analytics.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">React</span>
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">Chart.js</span>
+                            <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-xs">API</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Live Demo</a>
+                            <a href="#" class="text-gray-600 hover:underline"><i class="fab fa-github mr-1"></i>Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card card-hover">
+                    <div class="h-48 gradient-bg flex items-center justify-center">
+                        <i class="fas fa-blog text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3" style="color: var(--text-primary);">Personal Blog Site</h3>
+                        <p class="mb-4" style="color: var(--text-secondary);">
+                            Modern blog platform with markdown support, category filtering, and SEO optimization.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Next.js</span>
+                            <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Markdown</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">SEO</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Live Demo</a>
+                            <a href="#" class="text-gray-600 hover:underline"><i class="fab fa-github mr-1"></i>Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card card-hover">
+                    <div class="h-48 gradient-bg flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3" style="color: var(--text-primary);">Weather App</h3>
+                        <p class="mb-4" style="color: var(--text-secondary);">
+                            Beautiful weather application with location-based forecasts and interactive weather animations.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">JavaScript</span>
+                            <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">API</span>
+                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">CSS3</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Live Demo</a>
+                            <a href="#" class="text-gray-600 hover:underline"><i class="fab fa-github mr-1"></i>Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card card-hover">
+                    <div class="h-48 gradient-bg flex items-center justify-center">
+                        <i class="fas fa-users text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3" style="color: var(--text-primary);">Social Media Dashboard</h3>
+                        <p class="mb-4" style="color: var(--text-secondary);">
+                            Comprehensive social media management dashboard with post scheduling and analytics features.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">React</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Firebase</span>
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">Charts</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-blue-600 hover:underline"><i class="fas fa-external-link-alt mr-1"></i>Live Demo</a>
+                            <a href="#" class="text-gray-600 hover:underline"><i class="fab fa-github mr-1"></i>Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section-padding">
+        <div class="container">
+            <h2 class="text-4xl font-display font-bold text-center mb-12" style="color: var(--text-primary);">Experience & Education</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Experience -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-8 flex items-center" style="color: var(--primary-color);">
+                        <i class="fas fa-briefcase mr-3"></i>Experience
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="timeline-item">
+                            <div class="p-4 rounded-lg" style="background-color: var(--bg-secondary);">
+                                <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Frontend Developer</h4>
+                                <p class="text-sm mb-2" style="color: var(--primary-color);">Freelance • 2023 - Present</p>
+                                <p style="color: var(--text-secondary);">
+                                    Developing responsive web applications for local and international clients. 
+                                    Specializing in React.js, modern CSS, and user experience design.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="p-4 rounded-lg" style="background-color: var(--bg-secondary);">
+                                <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Junior Web Developer</h4>
+                                <p class="text-sm mb-2" style="color: var(--primary-color);">Tech Solutions • 2022 - 2023</p>
+                                <p style="color: var(--text-secondary);">
+                                    Contributed to various web development projects, focusing on frontend implementation 
+                                    and responsive design. Collaborated with design teams to bring mockups to life.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="p-4 rounded-lg" style="background-color: var(--bg-secondary);">
+                                <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Web Development Intern</h4>
+                                <p class="text-sm mb-2" style="color: var(--primary-color);">Digital Agency • 2021 - 2022</p>
+                                <p style="color: var(--text-secondary);">
+                                    Learned modern web development practices, version control with Git, 
+                                    and agile development methodologies while working on client projects.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-8 flex items-center" style="color: var(--primary-color);">
+                        <i class="fas fa-graduation-cap mr-3"></i>Education
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="timeline-item">
+                            <div class="p-4 rounded-lg" style="background-color: var(--bg-secondary);">
+                                <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Bachelor in Computer Science</h4>
+                                <p class="text-sm mb-2" style="color: var(--primary-color);">University of Kashmir • 2018 - 2022</p>
+                                <p style="color: var(--text-secondary);">
+                                    Focused on software development, data structures, algorithms, and web technologies. 
+                                    Graduated with honors and participated in multiple coding competitions.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="p-4 rounded-lg" style="background-color: var(--bg-secondary);">
+                                <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Full Stack Web Development</h4>
+                                <p class="text-sm mb-2" style="color: var(--primary-color);">Online Certification • 2021</p>
+                                <p style="color: var(--text-secondary);">
+                                    Completed comprehensive course covering HTML, CSS, JavaScript, React, Node.js, 
+                                    and database management. Built several projects during the certification.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="p-4 rounded-lg" style="background-color: var(--bg-secondary);">
+                                <h4 class="text-lg font-semibold" style="color: var(--text-primary);">Higher Secondary Education</h4>
+                                <p class="text-sm mb-2" style="color: var(--primary-color);">Kashmir School • 2016 - 2018</p>
+                                <p style="color: var(--text-secondary);">
+                                    Completed higher secondary education with focus on Mathematics and Computer Science. 
+                                    Developed early interest in programming and web technologies.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding gradient-bg text-white">
+        <div class="container">
+            <h2 class="text-4xl font-display font-bold text-center mb-12">Let's Work Together</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">Get in Touch</h3>
+                    <p class="text-lg mb-8 opacity-90">
+                        I'm always excited to work on new projects and collaborate with amazing people. 
+                        Whether you have a project in mind or just want to say hello, feel free to reach out!
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-2xl mr-4 text-cyan-300"></i>
+                            <div>
+                                <p class="font-semibold">Email</p>
+                                <p class="opacity-80">haneef.dev@email.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-2xl mr-4 text-green-300"></i>
+                            <div>
+                                <p class="font-semibold">Phone</p>
+                                <p class="opacity-80">7006505391</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-2xl mr-4 text-red-300"></i>
+                            <div>
+                                <p class="font-semibold">Location</p>
+                                <p class="opacity-80">Srinagar, Kashmir, India</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 mt-8">
+                        <a href="#" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form glass-effect">
+                    <h3 class="text-xl font-semibold mb-6">Send Message</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <input type="text" placeholder="Your Name" class="form-input" required>
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Your Email" class="form-input" required>
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Subject" class="form-input" required>
+                        </div>
+                        <div>
+                            <textarea placeholder="Your Message" rows="5" class="form-input resize-none" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full bg-white text-blue-600 hover:bg-gray-100">
+                            <i class="fas fa-paper-plane mr-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center" style="background-color: var(--bg-secondary); color: var(--text-secondary);">
+        <div class="container">
+            <p>&copy; 2024 Haneef. All rights reserved.</p>
+            <p class="mt-2">Made with <i class="fas fa-heart text-red-500"></i> in Srinagar, Kashmir</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I\'ll get back to you soon.');
+            this.reset();
+        });
+
+        // Add animation classes when elements come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.card-hover, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Animate skill bars when they come into view
+        const skillBars = document.querySelectorAll('.skill-progress');
+        skillBars.forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0%';
+            
+            const skillObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.width = width;
+                        }, 300);
+                        skillObserver.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            skillObserver.observe(bar);
+        });
+
+        // Add typing animation to hero section
+        window.addEventListener('load', function() {
+            const typewriter = document.querySelector('.typewriter');
+            if (typewriter) {
+                typewriter.style.width = '0';
+                setTimeout(() => {
+                    typewriter.style.width = '100%';
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
